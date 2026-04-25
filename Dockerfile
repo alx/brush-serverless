@@ -1,4 +1,10 @@
-# ── Stage 1: compile Brush from source ───────────────────────────────────────
+# ── Build args ────────────────────────────────────────────────────────────────
+# cuda12.5 target: CUDA_VERSION=12.5.1  UBUNTU_VERSION=24.04  (default/latest)
+# cuda12.4 target: CUDA_VERSION=12.4.1  UBUNTU_VERSION=22.04
+ARG CUDA_VERSION=12.5.1
+ARG UBUNTU_VERSION=24.04
+
+# ── Stage 1: compile Brush from source ────────────────────────────────────────
 # Brush uses wgpu (Vulkan) for GPU — no CUDA dependency at compile time.
 FROM rust:latest AS brush-builder
 
@@ -12,11 +18,10 @@ WORKDIR /brush
 RUN RUSTFLAGS="-C link-arg=-fuse-ld=lld" \
     cargo build --release -p brush-app --bin brush_app
 
-# ── Stage 2: runtime with CUDA 12.4+ + Vulkan ────────────────────────────────
-# Brush uses Vulkan (wgpu), not CUDA, so CUDA is only needed for driver access.
-# 12.4.1 is the minimum ubuntu24.04 CUDA image → host driver >= 12.4 required,
-# enabling allowedCudaVersions 12.4 through 12.9 on RunPod.
-FROM nvidia/cuda:12.4.1-base-ubuntu24.04
+# ── Stage 2: runtime with CUDA + Vulkan ───────────────────────────────────────
+# Brush uses Vulkan (wgpu), not CUDA — CUDA base image provides driver access.
+# Runtime packages are identical on ubuntu22.04 and ubuntu24.04 for Brush.
+FROM nvidia/cuda:${CUDA_VERSION}-base-ubuntu${UBUNTU_VERSION}
 ENV DEBIAN_FRONTEND=noninteractive
 ENV NVIDIA_DRIVER_CAPABILITIES=compute,utility,graphics
 

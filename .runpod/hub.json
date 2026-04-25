@@ -82,9 +82,12 @@
 
   "_metadata": {
     "brush_version": "main (built from source)",
-    "cuda_runtime_version": "12.4.1",
+    "cuda_targets": {
+      "cuda12.5": "nvidia/cuda:12.5.1-base-ubuntu24.04",
+      "cuda12.4": "nvidia/cuda:12.4.1-base-ubuntu22.04"
+    },
     "cuda_min_host_driver": "12.4",
-    "brush_gpu_backend": "Vulkan (wgpu) — CUDA not required",
+    "brush_gpu_backend": "Vulkan (wgpu) — CUDA not required at compile time",
     "source_repo": "https://github.com/alx/brush-serverless",
     "brush_upstream": "https://github.com/ArthurBrussee/brush"
   }
