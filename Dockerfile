@@ -16,7 +16,7 @@ RUN git clone --depth 1 https://github.com/ArthurBrussee/brush.git /brush
 
 WORKDIR /brush
 RUN RUSTFLAGS="-C link-arg=-fuse-ld=lld" \
-    cargo build --release -p brush-app --bin brush_app
+    cargo build --release -p brush-app --bin brush
 
 # ── Stage 2: runtime with CUDA + Vulkan ───────────────────────────────────────
 # Brush uses Vulkan (wgpu), not CUDA — CUDA base image provides driver access.
@@ -33,7 +33,7 @@ RUN apt-get update && apt-get install -y \
 WORKDIR /app
 RUN pip3 install --no-cache-dir --break-system-packages runpod numpy Pillow plyfile
 
-COPY --from=brush-builder /brush/target/release/brush_app /app/binaries/brush_app_linux
+COPY --from=brush-builder /brush/target/release/brush /app/binaries/brush_app_linux
 COPY scripts/ /app/scripts/
 COPY handler.py /app/handler.py
 
