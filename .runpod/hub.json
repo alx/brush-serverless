@@ -1,0 +1,89 @@
+{
+  "title": "RunSplat Brush — COLMAP Workspace to 3D Gaussian Splat",
+  "description": "Train a 3D Gaussian Splatting model from a COLMAP reconstruction workspace using Brush (built from source). Outputs a .ply file and web-ready .splat binary.",
+  "type": "serverless",
+  "category": "image",
+
+  "config": {
+    "runsOn": "GPU",
+    "containerDiskInGb": 30,
+    "gpuCount": 1,
+    "gpuIds": "ADA_24",
+    "allowedCudaVersions": [
+      "12.9"
+    ],
+
+    "env": [
+      {
+        "key": "TRAINING_STEPS",
+        "input": {
+          "name": "Training steps",
+          "type": "number",
+          "description": "Number of Brush training iterations. More steps = higher quality but longer runtime.",
+          "min": 5000,
+          "max": 100000,
+          "default": 30000,
+          "advanced": false
+        }
+      },
+      {
+        "key": "EVAL_EVERY",
+        "input": {
+          "name": "Evaluate every N steps",
+          "type": "number",
+          "description": "How often to compute and log training loss. Lower values produce more verbose logs.",
+          "min": 100,
+          "max": 10000,
+          "default": 1000,
+          "advanced": true
+        }
+      },
+      {
+        "key": "EXPORT_EVERY",
+        "input": {
+          "name": "Export checkpoint every N steps",
+          "type": "number",
+          "description": "Save intermediate PLY snapshots every N steps. Useful for monitoring long training runs.",
+          "min": 1000,
+          "max": 50000,
+          "default": 5000,
+          "advanced": true
+        }
+      }
+    ],
+
+    "presets": [
+      {
+        "name": "Fast preview (5k steps)",
+        "defaults": {
+          "TRAINING_STEPS": 5000,
+          "EVAL_EVERY": 500,
+          "EXPORT_EVERY": 1000
+        }
+      },
+      {
+        "name": "Standard quality (30k steps)",
+        "defaults": {
+          "TRAINING_STEPS": 30000,
+          "EVAL_EVERY": 1000,
+          "EXPORT_EVERY": 5000
+        }
+      },
+      {
+        "name": "High quality (60k steps)",
+        "defaults": {
+          "TRAINING_STEPS": 60000,
+          "EVAL_EVERY": 1000,
+          "EXPORT_EVERY": 5000
+        }
+      }
+    ]
+  },
+
+  "_metadata": {
+    "brush_version": "main (built from source)",
+    "cuda_version": "12.9.0",
+    "source_repo": "https://github.com/alx/brush-serverless",
+    "brush_upstream": "https://github.com/ArthurBrussee/brush"
+  }
+}
