@@ -10,7 +10,7 @@
     "gpuCount": 1,
     "gpuIds": "ADA_24",
     "allowedCudaVersions": [
-      "12.9"
+      "12.9", "12.8", "12.7", "12.6", "12.5", "12.4"
     ],
 
     "env": [
@@ -82,7 +82,9 @@
 
   "_metadata": {
     "brush_version": "main (built from source)",
-    "cuda_version": "12.9.0",
+    "cuda_runtime_version": "12.4.1",
+    "cuda_min_host_driver": "12.4",
+    "brush_gpu_backend": "Vulkan (wgpu) — CUDA not required",
     "source_repo": "https://github.com/alx/brush-serverless",
     "brush_upstream": "https://github.com/ArthurBrussee/brush"
   }
