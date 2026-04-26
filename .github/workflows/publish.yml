@@ -43,8 +43,8 @@ jobs:
             ${{ env.REGISTRY }}:${{ env.VERSION }}-cuda12.5
             ${{ env.REGISTRY }}:${{ env.VERSION }}
             ${{ env.REGISTRY }}:latest
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
+          cache-from: type=registry,ref=${{ env.REGISTRY }}:buildcache-cuda12.5
+          cache-to: type=registry,ref=${{ env.REGISTRY }}:buildcache-cuda12.5,mode=max
 
       - name: Build and push cuda12.4 (ubuntu22.04)
         uses: docker/build-push-action@v6
@@ -56,9 +56,27 @@ jobs:
             UBUNTU_VERSION=22.04
           tags: |
             ${{ env.REGISTRY }}:${{ env.VERSION }}-cuda12.4
-          cache-from: type=gha
+          cache-from: type=registry,ref=${{ env.REGISTRY }}:buildcache-cuda12.4
+          cache-to: type=registry,ref=${{ env.REGISTRY }}:buildcache-cuda12.4,mode=max
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
           generate_release_notes: true
+          body: |
+            ## Docker images
+
+            ```bash
+            # CUDA 12.5 · Ubuntu 24.04 (recommended)
+            docker pull ghcr.io/alx/brush-serverless:${{ env.VERSION }}
+            docker pull ghcr.io/alx/brush-serverless:${{ env.VERSION }}-cuda12.5
+
+            # CUDA 12.4 · Ubuntu 22.04 (older driver support)
+            docker pull ghcr.io/alx/brush-serverless:${{ env.VERSION }}-cuda12.4
+            ```
+
+            Run locally:
+            ```bash
+            docker run --rm --gpus all ghcr.io/alx/brush-serverless:${{ env.VERSION }} \
+              python3 handler.py
+            ```
