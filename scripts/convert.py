@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+# Copyright (c) 2025 Alexandre Girard
 # You can use this to convert a .ply file to a .splat file programmatically in python
 # Alternatively you can drag and drop a .ply file into the viewer at https://antimatter15.com/splat
 
