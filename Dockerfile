@@ -31,6 +31,9 @@ RUN apt-get update && apt-get install -y \
     && mkdir -p /usr/share/vulkan/icd.d /etc/vulkan/icd.d
 
 WORKDIR /app
+LABEL org.opencontainers.image.source=https://github.com/alx/brush-serverless
+LABEL org.opencontainers.image.description="RunPod serverless endpoint: COLMAP workspace → 3D Gaussian Splat (Brush)"
+LABEL org.opencontainers.image.licenses=MIT
 RUN pip3 install --no-cache-dir runpod numpy Pillow plyfile || \
     pip3 install --no-cache-dir --break-system-packages runpod numpy Pillow plyfile
 
