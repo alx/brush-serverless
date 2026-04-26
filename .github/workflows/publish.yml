@@ -43,8 +43,8 @@ jobs:
             ${{ env.REGISTRY }}:${{ env.VERSION }}-cuda12.5
             ${{ env.REGISTRY }}:${{ env.VERSION }}
             ${{ env.REGISTRY }}:latest
-          cache-from: type=registry,ref=${{ env.REGISTRY }}:buildcache
-          cache-to: type=registry,ref=${{ env.REGISTRY }}:buildcache,mode=max
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
 
       - name: Build and push cuda12.4 (ubuntu22.04)
         uses: docker/build-push-action@v6
@@ -56,7 +56,7 @@ jobs:
             UBUNTU_VERSION=22.04
           tags: |
             ${{ env.REGISTRY }}:${{ env.VERSION }}-cuda12.4
-          cache-from: type=registry,ref=${{ env.REGISTRY }}:buildcache
+          cache-from: type=gha
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
