@@ -1,5 +1,7 @@
 # brush-serverless
 
+[![Runpod](https://api.runpod.io/badge/alx/brush-serverless)](https://console.runpod.io/hub/alx/brush-serverless)
+
 Serverless [RunPod](https://www.runpod.io/) endpoint that trains a **3D Gaussian Splatting** model using [Brush](https://github.com/ArthurBrussee/brush), built from source. Part of the [RunSplat](https://github.com/alx/runsplat) pipeline.
 
 **Input:** COLMAP workspace (base64 tar.gz) from [colmap-serverless](https://github.com/alx/colmap-serverless)  
