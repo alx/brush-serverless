@@ -46,7 +46,7 @@ def run_brush(project_dir: Path, steps: int, eval_every: int, export_every: int)
         str(colmap_dir),
         "--export-path", str(brush_dir),
         "--export-name", export_name,
-        "--total-steps", str(steps),
+        "--total-train-iters", str(steps),
         "--eval-every", str(eval_every),
         "--export-every", str(export_every),
     ])
