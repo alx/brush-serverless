@@ -2,8 +2,13 @@
   "tests": [
     {
       "name": "smoke_test",
-      "input": {},
-      "timeout": 30000
+      "input": {
+        "colmap_workspace_url": "https://github.com/alx/brush-serverless/releases/download/v0.2.1/lighthouse_colmap_workspace.tar.gz",
+        "steps": 500,
+        "eval_every": 100,
+        "export_every": 500
+      },
+      "timeout": 600000
     }
   ],
   "config": {

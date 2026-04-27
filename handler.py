@@ -6,6 +6,7 @@ import subprocess
 import tarfile
 import tempfile
 import time
+import urllib.request
 from pathlib import Path
 
 import runpod
@@ -15,8 +16,14 @@ def handler(event):
     inp = event["input"]
 
     workspace_b64 = inp.get("colmap_workspace_b64")
+    workspace_url  = inp.get("colmap_workspace_url")
+
+    if not workspace_b64 and not workspace_url:
+        return {"error": "Provide colmap_workspace_b64 or colmap_workspace_url"}
+
     if not workspace_b64:
-        return {"error": "Provide colmap_workspace_b64 (base64 tar.gz of colmap/ directory)"}
+        with urllib.request.urlopen(workspace_url) as resp:
+            workspace_b64 = base64.b64encode(resp.read()).decode()
 
     steps        = int(inp.get("steps", 30000))
     eval_every   = int(inp.get("eval_every", 1000))
