@@ -1,5 +1,5 @@
 {
-  "title": "RunSplat Brush — COLMAP Workspace to 3D Gaussian Splat",
+  "title": "Brush — COLMAP Workspace to 3D Gaussian Splat",
   "description": "Train a 3D Gaussian Splatting model from a COLMAP reconstruction workspace using Brush (built from source). Outputs a .ply file and web-ready .splat binary.",
   "type": "serverless",
   "category": "image",
@@ -8,7 +8,7 @@
     "runsOn": "GPU",
     "containerDiskInGb": 30,
     "gpuCount": 1,
-    "gpuIds": "ADA_24",
+    "gpuIds": "ADA_24,AMPERE_24,ADA_48,AMPERE_48",
     "allowedCudaVersions": [
       "12.9", "12.8", "12.7", "12.6", "12.5", "12.4"
     ],
