@@ -3,7 +3,7 @@
     {
       "name": "smoke_test",
       "input": {
-        "colmap_workspace_url": "https://github.com/alx/brush-serverless/releases/download/v0.2.1/lighthouse_colmap_workspace.tar.gz",
+        "colmap_workspace_url": "https://github.com/alx/brush-serverless/releases/download/v0.2.2/lighthouse_colmap_workspace.tar.gz",
         "steps": 500,
         "eval_every": 100,
         "export_every": 500
