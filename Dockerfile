@@ -34,8 +34,8 @@ WORKDIR /app
 LABEL org.opencontainers.image.source=https://github.com/alx/brush-serverless
 LABEL org.opencontainers.image.description="RunPod serverless endpoint: COLMAP workspace → 3D Gaussian Splat (Brush)"
 LABEL org.opencontainers.image.licenses=MIT
-RUN pip3 install --no-cache-dir runpod numpy Pillow plyfile || \
-    pip3 install --no-cache-dir --break-system-packages runpod numpy Pillow plyfile
+RUN pip3 install --no-cache-dir runpod numpy Pillow plyfile requests || \
+    pip3 install --no-cache-dir --break-system-packages runpod numpy Pillow plyfile requests
 
 COPY --from=brush-builder /brush/target/release/brush /app/binaries/brush_app_linux
 COPY scripts/ /app/scripts/
